@@ -11,15 +11,33 @@ clock=pygame.time.Clock()
 #Define player movements variables
 #Estas son variables que no controlan el movimiento sino que avtivan en movimiento
 #los utilizaremos para avriar dx y dy
-
 #Estas variables seran conectadas a las entradas por teclado
 moving_left=False
 moving_right=False
 moving_up=False
 moving_down=False
 
+#Aqui
+#helped function to scale image
+def scale_img(image,scale):
+
+    w=image.get_width()
+    h=image.get_height()
+    new_image= pygame.transform.scale(image,(w*scale,h*scale))
+    return new_image
+
+
+animation_list = [] ##Aqui
+for i in range(4):
+    img=pygame.image.load(f"assets/images/characters/elf/idle/{i}.png").convert_alpha()
+    img=scale_img(img,constants.SCALE)
+    animation_list.append(img)
+
+
+
+#Aqui
 #create a player
-player=Character(40,50)
+player=Character(40,50,animation_list)
 
 running=True
 ##main game loop
@@ -31,8 +49,10 @@ while running:
     dy=0
     if moving_right==True:
         dx= constants.SPEED
+        #player.flip=False
     if moving_left == True:
         dx=-constants.SPEED
+        #player.flip=True
     if moving_up==True:
         dy= -constants.SPEED
     if moving_down==True:
@@ -40,6 +60,9 @@ while running:
     
     #move player
     player.move(dx,dy)
+
+    #update player
+    player.update() ##Aqui
 
 
     #draw player

@@ -9,3 +9,7 @@ BG=(40,25,25)
 FPS=60
 
 SPEED=5
+
+#Aqui
+#Global variable to scale the sprites in the game
+SCALE=3
